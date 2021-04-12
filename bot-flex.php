@@ -249,7 +249,7 @@ body {
 </head>
 <body>
 <!-- Modal HTML -->
-<div id="myModal" >
+<div id="myModal" style="text-align: center;">
 	<div class="modal-dialog modal-confirm">
 		<div class="modal-content">
 			<div class="modal-header">
