@@ -262,7 +262,7 @@ body {
 				<p class="text-center">Your booking has been confirmed. Check your email for detials.</p>
 			</div>
 			<div class="modal-footer">
-				<button class="btn btn-success btn-block" data-dismiss="modal">OK</button>
+				<button class="btn btn-success btn-block" data-dismiss="modal" onclick="window.open('', '_self', ''); window.close();">OK</button>
 			</div>
 		</div>
 	</div>
