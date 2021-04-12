@@ -250,9 +250,9 @@ body {
 <body>
 <!-- Modal HTML -->
 <div id="myModal" style="text-align: center;">
-	<div class="modal-dialog modal-confirm">
-		<div class="modal-content">
-			<div class="modal-header">
+	<div class="modal-dialog modal-confirm" style="text-align: center;">
+		<div class="modal-content" style="text-align: center;">
+			<div class="modal-header" style="text-align: center;">
 				<div class="icon-box">
 					<i class="material-icons">&#xE876;</i>
 				</div>				
