@@ -120,7 +120,7 @@ $jsonFlex = [
   ];
 
 $data = [
-            'to' => 'Udcd7bf6072dc5461c142765a62f8bc95',
+            'to' => $_GET['uId'],
             'messages' => [$jsonFlex]
         ];
 
