@@ -1,0 +1,168 @@
+<?php echo 'Manusak'?>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <title>CHG-3</title>
+    <style>
+        #pictureUrl {
+            display: block;
+            margin: 0 auto
+        }
+    </style>
+    <script src="line-push.js"></script>
+    <script src="google_script_form_ajax.js"></script>
+    <style>
+        .card {
+            max-width: 500px;
+            margin: auto;
+        }
+    </style>
+</head>
+
+<body>
+    <script>
+        var x = document.getElementById("demo");
+
+        function getLocation() {
+            if (navigator.geolocation) {
+                navigator.geolocation.getCurrentPosition(showPosition);
+            } else {
+                x.innerHTML = "Geolocation is not supported by this browser.";
+            }
+        }
+
+        function showPosition(position) {
+            getDistance(position.coords.latitude, position.coords.longitude, 13.599843416408037, 100.72124491603047);
+        }
+
+        function degrees_to_radians(degrees) {
+            var pi = Math.PI;
+            return degrees * (pi / 180);
+        }
+
+        function getDistance(latitude1, longitude1, latitude2, longitude2) {
+
+            var earth_radius = 6371;
+
+            var dLat = degrees_to_radians(latitude2 - latitude1);
+            var dLon = degrees_to_radians(longitude2 - longitude1);
+
+            var a = Math.sin(dLat / 2) * Math.sin(dLat / 2) + Math.cos(degrees_to_radians(latitude1)) * Math.cos(degrees_to_radians(latitude2)) * Math.sin(dLon / 2) * Math.sin(dLon / 2);
+            var c = 2 * Math.asin(Math.sqrt(a));
+            var d = earth_radius * c;
+
+            if (d < 0.1) {
+                window.location.replace("https://www.chularat3.com/");
+            } else {
+                alert("Outside area");
+            }
+        }
+    </script>
+
+    <script language="javascript">
+        function checkID(id) {
+            if (id.length != 13) return false;
+            for (i = 0, sum = 0; i < 12; i++)
+                sum += parseFloat(id.charAt(i)) * (13 - i); if ((11 - sum % 11) % 10 != parseFloat(id.charAt(12)))
+                return false; return true;
+        }
+
+        function checkForm() {
+            if (!checkID(document.form1.txtID.value))
+                alert('รหัสประชาชนไม่ถูกต้อง');
+            else alert('รหัสประชาชนถูกต้อง เชิญผ่านได้');
+        }
+    </script>
+
+    <script src="line-push.js"></script>
+    <!-- <div class="card" style="width: 18rem;">
+        <img class="card-img-top" id="pictureUrl" width="50%" alt="Card image cap">
+        <div class="card-body">
+            <h4 class="card-title" id="displayName"></h4>
+            <p class="card-text" id="userId"></p>
+            <a href="#" class="btn btn-primary">See Profile</a>
+        </div>
+    </div> -->
+    <form class="was-validated" method="POST">
+        <div class="card" style="width: 18rem;">
+            <!-- <img class="card-img-top" id="pictureUrl" width="50%" alt="Card image cap">
+            <div class="card-body">
+                <h4 class="card-title" id="displayName"></h4>
+                <p class="card-text" id="userId"></p>
+            </div> -->
+
+            <img class="card-img-top" width="50%" alt="Card image cap" src="./logo.jpg">
+            <div class="col-auto">
+                <label class="sr-only" for="inlineFormInputGroup">เลขบัตรประชาชน</label>
+                <p id="displayName"></p>
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">id</div>
+                    </div>
+                    <input type="tel" class="form-control is-invalid" name="txtID" id="inlineFormInputGroup"
+                        placeholder="เลขบัตรประชาชน" pattern="\d{13}" maxlength="13" minlength="13"
+                        aria-describedby="validationServer05Feedback" required>
+                </div>
+                <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="checkForm()">จองคิว</button>
+                <p id="demo"></p>
+            </div>
+        </div>
+    </form>
+
+    <script src="https://static.line-scdn.net/liff/edge/versions/2.7.1/sdk.js"></script>
+    <script>
+        function runApp() {
+            liff.getProfile().then(profile => {
+                document.getElementById("pictureUrl").src = profile.pictureUrl;
+                document.getElementById("userId").innerHTML = profile.userId;
+                document.getElementById("displayName").innerHTML = profile.displayName;
+                document.getElementById("statusMessage").innerHTML = profile.statusMessage;
+                document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+            }).catch(err => console.error(err));
+        }
+        liff.init({ liffId: "1655837577-ElQo20D4" }, () => {
+            if (liff.isLoggedIn()) {
+                runApp()
+            } else {
+                liff.login();
+            }
+        }, err => console.error(err.code, error.message));
+    </script>
+
+    <script>
+        const request = require('request-promise');
+        const LINE_MESSAGING_API = 'https://api.line.me/v2/bot/message';
+        const LINE_HEADER = {
+            'Content-Type': 'application/json',
+            'Authorization': 'Bearer seEOqoPlldE7pc3gYkTEMc/0MrfQIbWHvPjwRAA+dmSpybbLmc/cmsg24o+mvP9E68T5lBNMySUmW8Qxn/McyDUeQ1NgKHOom81NB51vgZr99wwSoVRiu9IBx46TJv6hihGU1m+ay5f5wMl4Os04uQdB04t89/1O/w1cDnyilFU='
+        };
+        function push() {
+            return request({
+                method: 'POST',
+                uri: '${LINE_MESSAGING_API}/push',
+                headers: LINE_HEADER,
+                body: JSON.stringify({
+                    to: 'Udcd7bf6072dc5461c142765a62f8bc95',
+                    messages: [
+                        {
+                            type: 'text',
+                            text: 'Manusak'
+                        }
+                    ]
+                })
+            }).then(() => {
+                return res.status(200).send('Done');
+            }).catch((error) => {
+                return Promise.reject(error);
+            });
+        }
+    </script>
+</body>
+
+</html>
