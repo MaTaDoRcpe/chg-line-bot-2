@@ -58,7 +58,7 @@
             var d = earth_radius * c;
 
             if (d < 0.1) {
-                window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php");
+                window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php?uId="+ window.userId);
             } else {
                 alert("Outside area");
             }
@@ -74,7 +74,7 @@
             <a href="#" class="btn btn-primary">See Profile</a>
         </div>
     </div> -->
-    <form class="was-validated" method="POST" name="form1">
+    <form class="was-validated" method="POST" name="form1" >
         <div class="card" style="width: 18rem;">
             <!-- <img class="card-img-top" id="pictureUrl" width="50%" alt="Card image cap">
             <div class="card-body">
