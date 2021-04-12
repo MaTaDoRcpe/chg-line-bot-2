@@ -132,7 +132,7 @@ $data = [
 
         //echo "Result: ".$send_result."\r\n";
 
-
+echo $_POST['inlineFormInputGroup'];
 
 
 
