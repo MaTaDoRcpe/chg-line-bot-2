@@ -58,7 +58,13 @@
             var d = earth_radius * c;
 
             if (d < 0.1) {
-                window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php");
+                // window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php");
+                $.ajax({
+                    url: 'bot-flex.php',
+                    success: function (data) {
+                        $('.result').html(data);
+                    }
+                });
             } else {
                 alert("Outside area");
             }
@@ -137,7 +143,7 @@
                 return false; return true;
         }
         function checkForm() {
-            if (!checkID(document.form1.inlineFormInputGroup.value)){
+            if (!checkID(document.form1.inlineFormInputGroup.value)) {
                 alert('รหัสประชาชนไม่ถูกต้อง');
                 location.reload();
             }
