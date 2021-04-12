@@ -58,13 +58,7 @@
             var d = earth_radius * c;
 
             if (d < 0.1) {
-                // window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php");
-                $.ajax({
-                    url: './bot-flex.php',
-                    success: function (data) {
-                        $('.result').html(data);
-                    }
-                });
+                window.location.replace("https://dry-everglades-39913.herokuapp.com/bot-flex.php");
             } else {
                 alert("Outside area");
             }
