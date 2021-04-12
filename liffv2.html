@@ -65,21 +65,6 @@
         }
     </script>
 
-    <script language="javascript">
-        function checkID(id) {
-            if (id.length != 13) return false;
-            for (i = 0, sum = 0; i < 12; i++)
-                sum += parseFloat(id.charAt(i)) * (13 - i); if ((11 - sum % 11) % 10 != parseFloat(id.charAt(12)))
-                return false; return true;
-        }
-
-        function checkForm() {
-            if (!checkID(document.form1.txtID.value))
-                alert('รหัสประชาชนไม่ถูกต้อง');
-            else alert('รหัสประชาชนถูกต้อง เชิญผ่านได้');
-        }
-    </script>
-
     <script src="line-push.js"></script>
     <!-- <div class="card" style="width: 18rem;">
         <img class="card-img-top" id="pictureUrl" width="50%" alt="Card image cap">
@@ -89,7 +74,7 @@
             <a href="#" class="btn btn-primary">See Profile</a>
         </div>
     </div> -->
-    <form class="was-validated" method="POST">
+    <form class="was-validated" method="POST" name="form1">
         <div class="card" style="width: 18rem;">
             <!-- <img class="card-img-top" id="pictureUrl" width="50%" alt="Card image cap">
             <div class="card-body">
@@ -105,9 +90,9 @@
                     <div class="input-group-prepend">
                         <div class="input-group-text">id</div>
                     </div>
-                    <input type="tel" class="form-control is-invalid" name="txtID" id="inlineFormInputGroup"
-                        placeholder="เลขบัตรประชาชน" pattern="\d{13}" maxlength="13" minlength="13"
-                        aria-describedby="validationServer05Feedback" required>
+                    <input type="tel" class="form-control is-invalid" name="inlineFormInputGroup"
+                        id="inlineFormInputGroup" placeholder="เลขบัตรประชาชน" pattern="\d{13}" maxlength="13"
+                        minlength="13" aria-describedby="validationServer05Feedback" required>
                 </div>
                 <button type="submit" class="btn btn-primary btn-lg btn-block" onclick="checkForm()">จองคิว</button>
                 <p id="demo"></p>
@@ -117,13 +102,22 @@
 
     <script src="https://static.line-scdn.net/liff/edge/versions/2.7.1/sdk.js"></script>
     <script>
+        var pictureUrl;
+        var userId;
+        var displayName;
+        var statusMessage;
         function runApp() {
             liff.getProfile().then(profile => {
-                document.getElementById("pictureUrl").src = profile.pictureUrl;
-                document.getElementById("userId").innerHTML = profile.userId;
-                document.getElementById("displayName").innerHTML = profile.displayName;
-                document.getElementById("statusMessage").innerHTML = profile.statusMessage;
-                document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+                // document.getElementById("pictureUrl").src = profile.pictureUrl;
+                // document.getElementById("userId").innerHTML = profile.userId;
+                // document.getElementById("displayName").innerHTML = profile.displayName;
+                // document.getElementById("statusMessage").innerHTML = profile.statusMessage;
+                // document.getElementById("getDecodedIDToken").innerHTML = '<b>Email:</b> ' + liff.getDecodedIDToken().email;
+
+                window.pictureUrl = profile.pictureUrl;
+                window.userId = profile.userId;
+                window.displayName = profile.displayName;
+                window.statusMessage = profile.statusMessage;
             }).catch(err => console.error(err));
         }
         liff.init({ liffId: "1655837577-ElQo20D4" }, () => {
@@ -133,6 +127,22 @@
                 liff.login();
             }
         }, err => console.error(err.code, error.message));
+    </script>
+
+    <script>
+        function checkID(id) {
+            if (id.length != 13) return false;
+            for (i = 0, sum = 0; i < 12; i++)
+                sum += parseFloat(id.charAt(i)) * (13 - i); if ((11 - sum % 11) % 10 != parseFloat(id.charAt(12)))
+                return false; return true;
+        }
+        function checkForm() {
+            if (!checkID(document.form1.inlineFormInputGroup.value)){
+                alert('รหัสประชาชนไม่ถูกต้อง');
+                location.reload();
+            }
+            else getLocation();
+        }
     </script>
 
     <script>
