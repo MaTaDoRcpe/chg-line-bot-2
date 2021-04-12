@@ -120,7 +120,7 @@ $jsonFlex = [
   ];
 
 $data = [
-            'to' => $_GET['uId'],
+            'to' => 'Udcd7bf6072dc5461c142765a62f8bc95',
             'messages' => [$jsonFlex]
         ];
 
@@ -132,7 +132,7 @@ $data = [
 
         //echo "Result: ".$send_result."\r\n";
 
-echo $_POST['inlineFormInputGroup'];
+echo $_GET['uId'];
 
 
 
